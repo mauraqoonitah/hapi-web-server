@@ -27,6 +27,7 @@ const routes = [{
             return 'Halaman tidak dapat diakses dengan method';
         },
     },
+    //path parameter
     {
         method: 'GET',
         path: '/hello/{name?}',
@@ -34,6 +35,23 @@ const routes = [{
             const { name = "stranger" } = request.params;
             return `Hello, ${name}`;
         }
+    },
+    //query parameter
+    // ketik di cmd curl -X GET http://localhost:5000/hello/dicoding?lang=id
+    {
+        method: 'GET',
+        path: '/hai/{name?}',
+        handler: (request, h) => {
+            const { name = "stranger" } = request.params;
+            const { lang } = request.query;
+
+            if (lang === 'id') {
+                return `Hai, ${name}!`;
+            }
+
+            return `Hello, ${name}!`;
+
+        },
     },
     {
         method: '*',
